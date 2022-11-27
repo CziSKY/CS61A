@@ -99,17 +99,15 @@ def with_if_function():
 
 
 def cond():
-    return True
+    return False
 
 
 def true_func():
     print(42)
-    return None
 
 
 def false_func():
     print(47)
-    return None
 
 
 def hailstone(x):
