@@ -147,6 +147,13 @@ def two(f):
 three = successor(two)
 
 
+def int_to_church(n):
+    to_return = zero
+    for _ in range(n):
+        to_return = successor(to_return)
+    return to_return
+
+
 def church_to_int(n):
     """Convert the Church numeral n to a Python integer.
 
@@ -183,10 +190,7 @@ def mul_church(m, n):
     12
     """
     "*** YOUR CODE HERE ***"
-    to_return = zero
-    for _ in range(church_to_int(m) * church_to_int(n)):
-        to_return = successor(to_return)
-    return to_return
+    return int_to_church(church_to_int(m) * church_to_int(n))
 
 
 def pow_church(m, n):
@@ -198,7 +202,4 @@ def pow_church(m, n):
     9
     """
     "*** YOUR CODE HERE ***"
-    to_return = zero
-    for _ in range(church_to_int(m) ** church_to_int(n)):
-        to_return = successor(to_return)
-    return to_return
+    return int_to_church(church_to_int(m) ** church_to_int(n))
