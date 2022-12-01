@@ -117,6 +117,38 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+
+    def get_strategy():
+        if who == 0:
+            return strategy0(score0, score1)
+        return strategy1(score1, score0)
+
+    def get_turn_points(rolls):
+        if who == 0:
+            return take_turn(rolls, score1, dice)
+        return take_turn(rolls, score0, dice)
+
+    previous_points_0, previous_points_1 = 0, 0
+    while score0 < goal and score1 < goal:
+        roll_dices = get_strategy()
+        roll_points = get_turn_points(roll_dices)
+        if who == 0:
+            score0 += roll_points
+            if feral_hogs:
+                if abs(previous_points_0 - roll_dices) == 2:
+                    score0 += 3
+                previous_points_0 = roll_points
+            if is_swap(score0, score1):
+                score0, score1 = score1, score0
+        elif who == 1:
+            score1 += roll_points
+            if feral_hogs:
+                if abs(previous_points_1 - roll_dices) == 2:
+                    score1 += 3
+                previous_points_1 = roll_points
+            if is_swap(score1, score0):
+                score0, score1 = score1, score0
+        who = other(who)
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
