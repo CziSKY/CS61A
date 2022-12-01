@@ -114,6 +114,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     say:        The commentary function to call at the end of the first turn.
     feral_hogs: A boolean indicating whether the feral hogs rule should be active.
     """
+    global comment
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
@@ -128,6 +129,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
             return take_turn(rolls, score1, dice)
         return take_turn(rolls, score0, dice)
 
+    comment_trigger = False
     previous_points_0, previous_points_1 = 0, 0
     while score0 < goal and score1 < goal:
         roll_dices = get_strategy()
@@ -151,8 +153,13 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
         who = other(who)
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
-    # BEGIN PROBLEM 6
-    "*** YOUR CODE HERE ***"
+        # BEGIN PROBLEM 6
+        "*** YOUR CODE HERE ***"
+        if not comment_trigger:
+            comment = say(score0, score1)
+            comment_trigger = True
+        else:
+            comment = comment(score0, score1)
     # END PROBLEM 6
     return score0, score1
 
