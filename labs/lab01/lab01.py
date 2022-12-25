@@ -38,9 +38,7 @@ def sum_digits(y):
     6
     """
     "*** YOUR CODE HERE ***"
-    str_num = str(y)
-    nums = map(lambda s: int(s), str_num)
-    return sum(nums)
+    return sum(map(lambda s: int(s), str(y)))
 
 def double_eights(n):
     """Return true if n has two eights in a row.
